@@ -1,4 +1,5 @@
 build:
+	@go mod tidy
 	@go build -o bin/habit-tracker
 
 run: build

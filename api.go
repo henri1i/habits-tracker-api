@@ -25,8 +25,8 @@ func (server *Server) Listen() {
     router := mux.NewRouter()
     router.HandleFunc("/habit", handleFuncError(server.habitHandler))
     router.HandleFunc("/habit/{id}", handleFuncError(server.specificHabitHandler))
-    log.Println("Server listen on: ", server.listenAddr)
 
+    log.Println("Server listen on: ", server.listenAddr)
 
     http.ListenAndServe(server.listenAddr, router)
 }
@@ -49,7 +49,7 @@ func (server *Server) specificHabitHandler(res http.ResponseWriter, req *http.Re
     case "PATCH":
         return server.toggleHabitStatus(res, req)
     case "DELETE":
-        return server.deleteHabit(res, req)
+        server.deleteHabit(res, req)
     }
 
     return fmt.Errorf("method not allowed %s", req.Method)

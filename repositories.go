@@ -1,12 +1,19 @@
 package main
 
+import (
+	"database/sql"
+	"log"
+
+	_ "github.com/lib/pq"
+
+)
 type Repositories struct {
     habits HabitRepository
 }
 
-func NewRepositories() Repositories {
+func NewRepositories(habits HabitRepository) Repositories {
     return Repositories{
-        habits: HabitPgRepository{},
+        habits: habits,
     }
 }
 
@@ -18,7 +25,21 @@ type HabitRepository interface {
     Delete(id string) error
 }
 
-type HabitPgRepository struct {}
+type HabitPgRepository struct {
+    db *sql.DB
+}
+
+func NewHabitPgRepository(connection string) (*HabitPgRepository, error) {
+    db, err := sql.Open("postgres", connection)
+
+    if err != nil {
+        log.Println("Failed to get connection string")
+
+        return nil, err
+    }
+   
+    return &HabitPgRepository{ db: db }, nil
+}
 
 func (r HabitPgRepository) Create(name string, status string, kind string) error {
     return nil
