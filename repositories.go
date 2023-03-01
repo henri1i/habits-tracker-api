@@ -11,12 +11,6 @@ type Repositories struct {
     habits HabitRepository
 }
 
-func NewRepositories(habits HabitRepository) Repositories {
-    return Repositories{
-        habits: habits,
-    }
-}
-
 type HabitRepository interface {
     Create(name string, status string, kind string) error
     Toggle(id string) error

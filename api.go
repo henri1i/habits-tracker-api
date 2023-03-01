@@ -11,10 +11,10 @@ import (
 
 type Server struct {
     listenAddr string
-    repositories Repositories
+    repositories *Repositories
 }
 
-func New(listenAddr string, repos Repositories) *Server {
+func NewServer(listenAddr string, repos *Repositories) *Server {
     return &Server{
         listenAddr: listenAddr, 
         repositories: repos,

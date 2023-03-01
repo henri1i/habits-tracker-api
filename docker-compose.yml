@@ -6,6 +6,6 @@ services:
     restart: always
     environment:
       POSTGRES_DB: habit_tracker
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
 
